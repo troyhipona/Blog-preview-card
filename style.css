@@ -1,0 +1,228 @@
+@font-face {
+    font-family: "Figtree";
+    src: url("./assets/fonts/Figtree-VariableFont_wght.woff2") format("woff2");
+    font-weight: 500 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@layer reset, theme, global, layout, components, states;
+
+/* Author Link https://jakelazaroff.com/words/my-modern-css-reset/ */
+
+@layer reset {
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    :root {
+        interpolate-size: allow-keywords;
+    }
+
+    body {
+        line-height: 1.5;
+    }
+
+    :where(img, picture, video, canvas, svg) {
+        display: block;
+        max-inline-size: 100%;
+    }
+
+    :where(input, button, textarea, select) {
+        font: inherit;
+        letter-spacing: inherit;
+        word-spacing: inherit;
+        color: currentColor;
+    }
+
+    :where(p, h1, h2, h3, h4, h5, h6) {
+        overflow-wrap: break-word;
+    }
+
+    :where(ol, ul) {
+        list-style: none;
+    }
+
+    :not([class]) {
+        &:where(h1, h2, h3, h4, h5, h6) {
+            margin-block: 0.75em;
+            margin-trim: block;
+            line-height: 1.25;
+            text-wrap: balance;
+            letter-spacing: -0.05ch;
+        }
+
+        &:where(p, ol, ul) {
+            margin-block: 1em;
+            margin-trim: block;
+        }
+
+        &:where(ol, ul) {
+            padding-inline-start: 1.5em;
+            list-style: revert;
+        }
+
+        &:where(li) {
+            margin-block: 0.5em;
+            margin-trim: block;
+        }
+    }
+}
+
+@layer theme {
+    :root {
+        /* Colors */
+        --color-text-heading: oklch(18.22% 0 0);
+        --color-text-para: hsl(0, 0%, 42%);
+        --color-background: oklch(86.55% 0.1495 93.36);
+        --color-surface: oklch(100% 0 0);
+        --color-border: oklch(18.22% 0 0);
+
+        /* Typhography */
+
+        --font-family-base: "Figtree", sans-serif;
+        --font-size-small: 0.875rem;
+        --font-size-base: 1rem;
+        --font-size-lg: 1.5rem;
+        --font-weight-medium: 500;
+        --font-weight-bold: 700;
+
+        /* Spacing */
+        --spacing-lg: 1.5rem;
+        --spacing-md: 0.75rem;
+        --spacing-sm: 0.5rem;
+        --spacing-xs: 0.25rem;
+
+        /* Border*/
+        --border-radius-lg: 1.5rem;
+        --border-radius-sm: 0.5rem;
+
+
+    }
+
+}
+
+@layer global {
+    body {
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-base);
+        color: var(--color-text-para);
+        background-color: var(--color-background);
+        line-height: 1.5;
+        min-block-size: 100dvh;
+
+    }
+
+    h1 {
+        font-size: clamp(1.25rem, 1.162rem + 0.3756vw, 1.5rem);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-heading);
+        margin-block-end: 0.75em;
+    }
+
+    p {
+        font-size: var(--font-size-base);
+        color: var(--color-text-para);
+    }
+}
+
+@layer layout {
+    body {
+        display: grid;
+        place-items: center;
+    }
+
+    main {
+        width: min(100%, 24rem);
+    }
+
+}
+
+@layer component {
+    body {
+        margin-inline: var(--spacing-lg);
+    }
+
+    main {
+        background-color: var(--color-surface);
+        padding: var(--spacing-lg);
+        margin-inline: var(--spacing-lg);
+        border-radius: var(--border-radius-lg);
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--color-border);
+        box-shadow: 13px 15px 0px -3px oklch(0% 0 0);
+
+
+        & .blog-card__image {
+            width: 100%;
+            aspect-ratio: 1.5;
+            object-fit: cover;
+            border-radius: var(--border-radius-sm);
+            margin-block-end: var(--spacing-lg);
+        }
+
+        & > article {
+
+            & .blog-card__category {
+                font-size: var(--font-size-small);
+                font-weight: var(--font-weight-bold);
+                color: var(--color-text-heading);
+                background-color: var(--color-background);
+                width: fit-content;
+                padding: var(--spacing-xs) var(--spacing-sm);
+                margin-block-end: 0.75em;
+                border-radius: var(--border-radius-sm);
+            }
+
+            & .blog-card__date {
+                font-size: var(--font-size-small);
+                color: var(--color-text-heading);
+                margin-block-end: 0.75em;
+            }
+
+            & .blog-card__description {
+                font-size: clamp(0.875rem, 0.831rem + 0.1878vw, 1rem);
+                color: var(--color-text-para);
+                margin-block-end: 3rem;
+            }
+
+            & .blog-card__author {
+                display: flex;
+                align-items: center;
+                gap: var(--spacing-sm);
+
+                & .blog-card__author-image {
+                    border-radius: var(--border-radius-sm);
+                }
+
+                & p {
+                    font-size: var(--font-size-small);
+                    color: var(--color-text-heading);
+                    font-weight: var(--font-weight-bold);
+                }
+            }
+
+        }
+
+    }
+
+}
+
+@layer states {
+    .attribution {
+        font-size: 0.6875rem;
+        text-align: center;
+        margin-block-start: var(--spacing-lg);
+    }
+
+    .attribution a {
+        color: oklch(46.63% 0.13245 270.166);
+    }
+}
